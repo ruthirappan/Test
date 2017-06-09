@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Local_Time_24_Short__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Shows the local time (without date) of the Contact/Account associated with the Case in 24-hr format.</description>
+        <externalId>false</externalId>
+        <formula>IF(Contact.Timezone__c != null, Contact.Local_Time_24_Short__c, Account.Local_Time_24_Short__c)</formula>
+        <inlineHelpText>Shows the local time (without date) of the Contact associated with the Case in 24-hr format.</inlineHelpText>
+        <label>Local Time</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Local_Time_24__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Shows the local time of the Contact/Account associated with the Case in 24-hr format.</description>
+        <externalId>false</externalId>
+        <formula>IF(Contact.Timezone__c != null, Contact.Local_Time_24__c, Account.Local_Time_24__c)</formula>
+        <inlineHelpText>Shows the local time of the Contact associated with the Case in 24-hr format.</inlineHelpText>
+        <label>Local Time</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Local_Time_Short__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Shows the local time (without date) of the Contact/Account associated with the Case.</description>
+        <externalId>false</externalId>
+        <formula>IF(Contact.Timezone__c != null, Contact.Local_Time_Short__c, Account.Local_Time_Short__c)</formula>
+        <inlineHelpText>Shows the local time (without date) of the Contact associated with the Case.</inlineHelpText>
+        <label>Local Time</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Local_Time__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Shows the local time of the Contact/Account associated with the Case.</description>
+        <externalId>false</externalId>
+        <formula>IF(Contact.Timezone__c != null, Contact.Local_Time__c, Account.Local_Time__c)</formula>
+        <inlineHelpText>Shows the local time of the Contact associated with the Case.</inlineHelpText>
+        <label>Local Time</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Timezone_Formula__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Timezone abbreviation (PST, EST,etc..) of the Contact/Account associated with the Case.</description>
+        <externalId>false</externalId>
+        <formula>IF(Contact.Timezone__c != null, Contact.Timezone__c, Account.Timezone__c)</formula>
+        <inlineHelpText>Timezone abbreviation (PST, EST,etc..) of the Contact associated with the Case.</inlineHelpText>
+        <label>Timezone</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Timezone_Full__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Full timezone name of the Contact/Account associated with the Case.</description>
+        <externalId>false</externalId>
+        <formula>IF(Contact.Timezone__c != null, Contact.Timezone_Full__c, Account.Timezone_Full__c)</formula>
+        <inlineHelpText>Full timezone name of the Contact associated with the Case.</inlineHelpText>
+        <label>Timezone (Full)</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UTC_Offset_Formula__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Shows the UTC timezone offset of the Contact/Account associated with the Case.</description>
+        <externalId>false</externalId>
+        <formula>IF(Contact.Timezone__c != null, Contact.UTF_Offset__c, Account.UTF_Offset__c)</formula>
+        <inlineHelpText>Shows the UTC timezone offset of the Contact associated with the Case.</inlineHelpText>
+        <label>UTC Offset</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <webLinks>
+        <fullName>Local_Time_Case_Btn</fullName>
+        <availability>online</availability>
+        <description>Find Local Time is a button that can be placed in the Cases Page Layout.</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Find Local Time</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/30.0/connection.js&quot;)}
+{!REQUIRESCRIPT(&quot;/soap/ajax/30.0/apex.js&quot;)}
+{!REQUIRESCRIPT(&quot;https://success-software.biz/localtime/js/json3.min.js&quot;)} 
+
+function calcTime(sOffset,sFrequency,sEnd,sObject) {
+	tbutton=document.getElementsByName(sObject);
+
+	if(sOffset == &apos;N/A&apos;) {
+		for(i=0;i&lt;tbutton.length;i++) {
+			tbutton[i].value=&apos;Unknown&apos;;
+		}
+	}
+	else {
+		var args1={offset:sOffset};
+		cttime=sforce.apex.execute(&quot;tz.LocalTime&quot;,&quot;getLocalTimeString&quot;,args1);
+		for(i=0;i&lt;tbutton.length;i++) {
+			tbutton[i].value=cttime +  &quot; &quot; + sEnd;
+		}
+	}
+
+	self.status=tbutton[0].value;
+	setTimeout(&apos;tbutton[0].click();&apos;,sFrequency);
+}
+
+onError=null;
+
+if(typeof sOffset==&apos;undefined&apos;) {
+	sOffset=&apos;N/A&apos;;
+	sEnd=&apos;N/A&apos;;
+
+	try {
+		if(&quot;{!Contact.Id}&quot; != &quot;&quot;) {
+			var args={objId:&quot;{!JSENCODE(Contact.Id)}&quot;};
+			var jsontext=sforce.apex.execute(&quot;tz.LocalTime&quot;,&quot;FindLocalTime&quot;,args);
+			if(jsontext != null) {
+				var lt=JSON.parse(jsontext);
+				sOffset=lt.offset;
+				sEnd=lt.abbreviation;
+			}
+		}
+
+		if(sOffset == &apos;N/A&apos; &amp;&amp; &quot;{!Account.Id}&quot; != &quot;&quot;) {
+			var args={objId:&quot;{!JSENCODE(Account.Id)}&quot;}; 
+			var jsontext=sforce.apex.execute(&quot;tz.LocalTime&quot;,&quot;FindLocalTime&quot;,args);
+			if(jsontext != null) {
+				var lt=JSON.parse(jsontext);
+				sOffset=lt.offset;
+				sEnd=lt.abbreviation;
+			}
+		}
+		if(&quot;{!$Setup.lt_app_settings__c.Abbreviation__c}&quot; == &quot;false&quot;) sEnd = &apos;&apos;; 
+	} catch(err) {alert(err);}
+}
+
+if(typeof freq==&apos;undefined&apos;) {
+	freq=sforce.apex.execute(&quot;tz.LocalTime&quot;,&quot;getFrequency&quot;,{});
+}
+
+calcTime(sOffset,freq,sEnd,&quot;tz__local_time_case_btn&quot;);</url>
+    </webLinks>
+</CustomObject>

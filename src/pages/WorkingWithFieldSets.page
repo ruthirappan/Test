@@ -1,0 +1,24 @@
+<apex:page standardController="Contact" showHeader="false" sidebar="false">
+ 
+ <!--<apex:repeat value="{!$ObjectType.Account.FieldSets.AccountOverviewPageFieldSet}" var="f">
+   <apex:outputText value="{!Account[f]}"/> <br/>
+ </apex:repeat> -->
+ 
+ <apex:pageBlock title="Fields in Proper Names">
+  <apex:pageBlockTable value="{!$ObjectType.Contact.FieldSets.ProperNames}" var="f">
+   <apex:column value="{!f}">
+       <apex:facet name="header"> Name </apex:facet>
+   </apex:column> 
+   <apex:column value="{!f}">
+       <apex:facet name="header"> Label </apex:facet>
+   </apex:column>
+   <apex:column value="{!f.Type}" >
+       <apex:facet name="header">Data Type</apex:facet>
+   </apex:column>       
+  
+  </apex:pageBlockTable>
+ 
+ </apex:pageBlock>
+ 
+  
+</apex:page>

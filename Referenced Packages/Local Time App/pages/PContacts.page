@@ -1,0 +1,3 @@
+<apex:page >
+<apex:outputText value="Deprecated." />
+</apex:page>

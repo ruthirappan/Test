@@ -1,0 +1,26 @@
+<apex:page controller="AccountListDisplay" tabStyle="Account" sidebar="false" showHeader="false">
+
+ <apex:pageBlock title="Existing Account">
+  <apex:pageBlockSection title="Account List Display">
+   <Apex:pageblockTable value="{!Account}" var="Acc" >
+    <apex:column value="{!Acc.id}" />
+    <apex:column value="{!Acc.Name}"/>
+    <apex:column value="{!Acc.Type}"/>
+   
+   </Apex:pageblockTable>
+  </apex:pageBlockSection>
+  <!--<apex:dataTable value="{!Account}" var="Acc" cellpadding="6" columnsWidth="100" >
+   <apex:column> 
+    <apex:facet name="header">Name</apex:facet>
+    <apex:outputText value="{!Acc.name}"/>
+   </apex:column> 
+   <apex:column>
+    <apex:facet name="header">Type</apex:facet>
+    <apex:outputText value="{!Acc.Type}"> </apex:outputText>
+   </apex:column> 
+  </apex:dataTable>-->
+ </apex:pageBlock> 
+ 
+ 
+ 
+</apex:page>

@@ -1,0 +1,6 @@
+<apex:page controller="simplegetMethod" sidebar="false" showHeader="false">
+ <apex:form >
+  <apex:outputLabel value="Enter Your Username"/>
+   <apex:inputText value="{!userinput}"/>
+ </apex:form>
+</apex:page>

@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>Settings for the Local Time App. It is recommended to change these settings from the Local Time Config tab instead of directly manipulating them here.</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Abbreviation__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Enable this option if you want to show time zone abbreviation next to the local time (PST, EST etc).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enable this option if you want to show time zone abbreviation next to the local time (PST, EST etc).</inlineHelpText>
+        <label>Time Zone Short Name</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Account_Fields__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Comma separated account fields (Country, State, City, Phone).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Comma separated account fields (Country, State, City, Phone).</inlineHelpText>
+        <label>Account Fields</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Account_Filter__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Account Filter</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Account_Triggers__c</fullName>
+        <defaultValue>&quot;true,false,false&quot;</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Comma separated values for Account Trigger (Normal,Batch job,Scheduled job).
+Example: true,false,false</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Comma separated values for Account Trigger (Normal,Batch job,Scheduled job).
+Example: true,false,false</inlineHelpText>
+        <label>Account Triggers</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Activity_Triggers__c</fullName>
+        <defaultValue>&quot;true,false,false&quot;</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Comma separated values for Activity Trigger (Normal,Batch job,Scheduled job).
+Example: true,false,false</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Comma separated values for Activity Trigger (Normal,Batch job,Scheduled job).
+Example: true,false,false</inlineHelpText>
+        <label>Activity Triggers</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Africa_DST__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Enable this option if you want to start using daylight saving time. Normally this value is set twice an year.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DST is the practice of temporarily advancing clocks during the summer time so that afternoons have more daylight and mornings have less. Typically clocks are adjusted forward one hour near the start of spring and are adjusted backward in autumn.</inlineHelpText>
+        <label>Africa DST</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Asia_DST_Start_Batch__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>System field - Set to true when DST is started. Set to false when DST is stopped. Batch job runs when it is set to true the first time.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System field - Set to true when DST is started. Set to false when DST is stopped. Batch job runs when it is set to true the first time.</inlineHelpText>
+        <label>Asia DST Start Batch</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Asia_DST__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Asia - Enable this option if you want to start using daylight saving time. Normally this value is set twice an year.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DST is the practice of temporarily advancing clocks during the summer time so that afternoons have more daylight and mornings have less. Typically clocks are adjusted forward one hour near the start of spring and are adjusted backward in autumn.</inlineHelpText>
+        <label>Asia DST</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Batch_Size__c</fullName>
+        <defaultValue>30</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Number of records to be processed by a batch job.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of records to be processed by a batch job.</inlineHelpText>
+        <label>Batch Size</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Case_Triggers__c</fullName>
+        <defaultValue>&quot;true,false,false&quot;</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Comma separated values for Case Trigger (Normal,Batch job,Scheduled job).
+Example: true,false,false</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Comma separated values for Case Trigger (Normal,Batch job,Scheduled job).
+Example: true,false,false</inlineHelpText>
+        <label>Case Triggers</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact_Fields__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Comma separated contact fields (Country, State, City, Phone).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Comma separated contact fields (Country, State, City, Phone).</inlineHelpText>
+        <label>Contact Fields</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact_Filter__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Contact Filter</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Contact_Triggers__c</fullName>
+        <defaultValue>&quot;true,false,false&quot;</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Comma separated values for Contact Trigger (Normal,Batch job,Scheduled job).
+Example: true,false,false</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Comma separated values for Contact Trigger (Normal,Batch job,Scheduled job).
+Example: true,false,false</inlineHelpText>
+        <label>Contact Triggers</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DST_Automatic__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Enable the checkbox if you want the App to automatically identify DST settings (Recommended).
+
+Disable the checkbox if you want to manually define DST settings for different regions.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enable the checkbox if you want the App to automatically identify DST settings (Recommended).
+
+Disable the checkbox if you want to manually define DST settings for different regions.</inlineHelpText>
+        <label>DST Automatic</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Default_Phone_Code__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The App will utilize this phone code for all phone numbers where the country phone code (+1, +44 etc..) is missing.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The App will utilize this phone code for all phone numbers where the country phone code (+1, +44 etc..) is missing.</inlineHelpText>
+        <label>Default Country Phone Code</label>
+        <length>5</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Enable_Batch_Updates__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Enable the checkbox if you want the App to automatically update records when DST settings change for a region (Recommended).
+
+If disabled, you are responsible to manually update records whenever a region goes in/out of DST.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enable the checkbox if you want the App to automatically update records when DST settings change for a region (Recommended).
+
+If disabled, you are responsible to manually update records whenever a region goes in/out of DST.</inlineHelpText>
+        <label>Enable DST Batch Updates</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Europe_DST_Start_Batch__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>System field - Set to true when DST is started. Set to false when DST is stopped. Batch job runs when it is set to true the first time.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System field - Set to true when DST is started. Set to false when DST is stopped. Batch job runs when it is set to true the first time.</inlineHelpText>
+        <label>Europe DST Start Batch</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Europe_DST__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Europe - Enable this option if you want to start using daylight saving time. Normally this value is set twice an year.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DST is the practice of temporarily advancing clocks during the summer time so that afternoons have more daylight and mornings have less. Typically clocks are adjusted forward one hour near the start of spring and are adjusted backward in autumn.</inlineHelpText>
+        <label>Europe DST</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Frequency__c</fullName>
+        <defaultValue>60</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Input a value to indicate how frequently you want to update the time shown by the Local Time button.
+
+Negative values are not valid.
+
+Example: 10. This means the time value is updated every 10 seconds. If the current time is 10:20:10 AM, then the next value shown is 10:20:20 AM, and then 10:20:30 AM after 10 seconds and so on.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This value indicates how frequently you want to update the time shown by the Local Time button.
+A lower value will update the time value more frequently but might consume more browser resources than a higher frequency value.</inlineHelpText>
+        <label>Frequency (Seconds)</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Gadget_Time_Format__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Time display format for the visualforce based Local Time gadget and Find Local Time detail page button.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Time display format for the visualforce based Local Time gadget and Find Local Time detail page button.</inlineHelpText>
+        <label>Local Time Gadget Time Format</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Israel_DST_Start_Batch__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>System field - Set to true when DST is started. Set to false when DST is stopped. Batch job runs when it is set to true the first time.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System field - Set to true when DST is started. Set to false when DST is stopped. Batch job runs when it is set to true the first time.</inlineHelpText>
+        <label>Israel DST Start Batch</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Israel_DST__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Israel - Enable this option if you want to start using daylight saving time. Normally this value is set twice an year.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DST is the practice of temporarily advancing clocks during the summer time so that afternoons have more daylight and mornings have less. Typically clocks are adjusted forward one hour near the start of spring and are adjusted backward in autumn.</inlineHelpText>
+        <label>Israel DST</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Job_Start_Time__c</fullName>
+        <defaultValue>&quot;03&quot;</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Job Start Time</label>
+        <length>6</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lead_Fields__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Comma separated lead fields (Country, State, City, Phone).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Comma separated lead fields (Country, State, City, Phone).</inlineHelpText>
+        <label>Lead Fields</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lead_Filter__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Lead Filter</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Lead_Triggers__c</fullName>
+        <defaultValue>&quot;true,false,false&quot;</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Comma separated values for Lead Trigger (Normal,Batch job,Scheduled job).
+Example: true,false,false</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Comma separated values for Lead Trigger (Normal,Batch job,Scheduled job).
+Example: true,false,false</inlineHelpText>
+        <label>Lead Triggers</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NA_DST_Start_Batch__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>System field - Set to true when DST is started. Set to false when DST is stopped. Batch job runs when it is set to true the first time.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System field - Set to true when DST is started. Set to false when DST is stopped. Batch job runs when it is set to true the first time.</inlineHelpText>
+        <label>NA DST Start Batch</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>NA_DST__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>North America - Enable this option if you want to start using daylight saving time. Normally this value is set twice an year.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DST is the practice of temporarily advancing clocks during the summer time so that afternoons have more daylight and mornings have less. Typically clocks are adjusted forward one hour near the start of spring and are adjusted backward in autumn.</inlineHelpText>
+        <label>NA DST</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>NZ_DST_Start_Batch__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>System field - Set to true when DST is started. Set to false when DST is stopped. Batch job runs when it is set to true the first time.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System field - Set to true when DST is started. Set to false when DST is stopped. Batch job runs when it is set to true the first time.</inlineHelpText>
+        <label>NZ DST Start Batch</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>NZ_DST__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>New Zealand - Enable this option if you want to start using daylight saving time. Normally this value is set twice an year.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DST is the practice of temporarily advancing clocks during the summer time so that afternoons have more daylight and mornings have less. Typically clocks are adjusted forward one hour near the start of spring and are adjusted backward in autumn.</inlineHelpText>
+        <label>NZ DST</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Oceania_DST_Start_Batch__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>System field - Set to true when DST is started. Set to false when DST is stopped. Batch job runs when it is set to true the first time.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System field - Set to true when DST is started. Set to false when DST is stopped. Batch job runs when it is set to true the first time.</inlineHelpText>
+        <label>Oceania DST Start Batch</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Oceania_DST__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Oceania - Enable this option if you want to start using daylight saving time. Normally this value is set twice an year.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DST is the practice of temporarily advancing clocks during the summer time so that afternoons have more daylight and mornings have less. Typically clocks are adjusted forward one hour near the start of spring and are adjusted backward in autumn.</inlineHelpText>
+        <label>OCEANIA DST</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Person_Account_Fields__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Comma separated person account fields (Country, State, City, Phone).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Comma separated person account fields (Country, State, City, Phone).</inlineHelpText>
+        <label>Person Account Fields</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Phone_First__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>By default the App checks first the address fields and then the phone number to compute Local Time.
+
+Enable the checkbox to reverse this order.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>By default the App checks first the address fields and then the phone number to compute Local Time.
+
+Enable the checkbox to reverse this order.</inlineHelpText>
+        <label>Phone First?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SA_DST_Start_Batch__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>System field - Set to true when DST is started. Set to false when DST is stopped. Batch job runs when it is set to true the first time.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System field - Set to true when DST is started. Set to false when DST is stopped. Batch job runs when it is set to true the first time.</inlineHelpText>
+        <label>SA DST Start Batch</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SA_DST__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>South America - Enable this option if you want to start using daylight saving time. Normally this value is set twice an year.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>DST is the practice of temporarily advancing clocks during the summer time so that afternoons have more daylight and mornings have less. Typically clocks are adjusted forward one hour near the start of spring and are adjusted backward in autumn.</inlineHelpText>
+        <label>SA DST</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Update_DST__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Indicates if the Update DST Settings future method is running or not.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Indicates if the Update DST Settings future method is running or not.</inlineHelpText>
+        <label>Update DST</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Local Time App Settings</label>
+    <visibility>Public</visibility>
+</CustomObject>

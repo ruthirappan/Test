@@ -1,0 +1,4 @@
+<apex:page standardController="Account" extensions="contactsonAccountExtension">
+ <apex:outputLabel value="Total Number of Contacts on Account is : "/>
+ <apex:outputText value="{!sum}"/>
+</apex:page>

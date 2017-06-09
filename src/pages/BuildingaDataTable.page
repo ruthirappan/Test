@@ -1,0 +1,11 @@
+<apex:page standardController="Account">
+    <apex:pageBlock title="Hello {!$User.LastName}">
+    </apex:pageBlock>
+    <apex:pageblock title="Contacts">
+       <apex:pageBlockTable value="{!account.Contacts}" Var="contact">
+          <apex:column value="{!contact.Name}"/>
+          <apex:column Value="{!contact.Phone}"/>
+          <apex:column value="{!contact.Email}"/>
+       </apex:pageBlockTable>
+    </apex:pageblock>
+</apex:page>

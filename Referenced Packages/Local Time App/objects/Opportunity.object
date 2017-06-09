@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Local_Time_24_Short__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Shows the local time (without date) of the Account associated with the Opportunity in 24-hr format.</description>
+        <externalId>false</externalId>
+        <formula>Account.Local_Time_24_Short__c</formula>
+        <inlineHelpText>Shows the local time (without date) of the Account associated with the Opportunity in 24-hr format.</inlineHelpText>
+        <label>Local Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Local_Time_24__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Shows the local time of the Account associated with the Opportunity in 24-hr format.</description>
+        <externalId>false</externalId>
+        <formula>Account.Local_Time_24__c</formula>
+        <inlineHelpText>Shows the local time of the Account associated with the Opportunity in 24-hr format.</inlineHelpText>
+        <label>Local Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Local_Time_Short__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Shows the local time (without date) of the Account associated with the Opportunity.</description>
+        <externalId>false</externalId>
+        <formula>Account.Local_Time_Short__c</formula>
+        <inlineHelpText>Shows the local time (without date) of the Account associated with the Opportunity.</inlineHelpText>
+        <label>Local Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Local_Time__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Shows the local time of the Account associated with the Opportunity.</description>
+        <externalId>false</externalId>
+        <formula>Account.Local_Time__c</formula>
+        <inlineHelpText>Shows the local time of the Account associated with the Opportunity.</inlineHelpText>
+        <label>Local Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Timezone_Full__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Full timezone name of the Account associated with the Opportunity.</description>
+        <externalId>false</externalId>
+        <formula>Account.Timezone_Full__c</formula>
+        <inlineHelpText>Full timezone name of the Account associated with the Opportunity.</inlineHelpText>
+        <label>Timezone (Full)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Timezone__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Timezone abbreviation (PST, EST,etc..) of the Account associated with the Opportunity.</description>
+        <externalId>false</externalId>
+        <formula>Account.Timezone__c</formula>
+        <inlineHelpText>Timezone abbreviation (PST, EST,etc..) of the Account associated with the Opportunity.</inlineHelpText>
+        <label>Timezone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <webLinks>
+        <fullName>Local_Time_Opp_Btn</fullName>
+        <availability>online</availability>
+        <description>Find Local Time is a button that can be placed in the Opportunity Page Layout.
+
+The Billing Country, Billing State, and Billing City fields of the Account need to be properly filled in order for this button to function properly. In case of faulty or inadequate data, &quot;Unknown&quot; is shown in the button.</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Find Local Time</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/30.0/connection.js&quot;)}
+{!REQUIRESCRIPT(&quot;/soap/ajax/30.0/apex.js&quot;)}
+{!REQUIRESCRIPT(&quot;https://success-software.biz/localtime/js/json3.min.js&quot;)} 
+
+function calcTime(sOffset,sFrequency,sEnd,sObject) {
+tbutton=document.getElementsByName(sObject);
+
+if(sOffset == &apos;N/A&apos;) {
+for(i=0;i&lt;tbutton.length;i++) {
+tbutton[i].value=&apos;Unknown&apos;;
+}
+}
+else {
+var args1={offset:sOffset};
+cttime=sforce.apex.execute(&quot;tz.LocalTime&quot;,&quot;getLocalTimeString&quot;,args1);
+for(i=0;i&lt;tbutton.length;i++) {
+tbutton[i].value=cttime +  &quot; &quot; + sEnd;
+}
+}
+
+self.status=tbutton[0].value;
+setTimeout(&apos;tbutton[0].click();&apos;,sFrequency);
+
+}
+onError=null;
+
+if(typeof sOffset==&apos;undefined&apos;) {
+sOffset=&apos;N/A&apos;;
+sEnd=&apos;N/A&apos;;
+
+try { 
+var args={objId:&quot;{!JSENCODE(Account.Id)}&quot;};
+var jsontext=sforce.apex.execute(&quot;tz.LocalTime&quot;,&quot;FindLocalTime&quot;,args);
+if(jsontext != null) {
+var lt=JSON.parse(jsontext);
+sOffset=lt.offset;
+sEnd=lt.abbreviation;
+if(&quot;{!$Setup.lt_app_settings__c.Abbreviation__c}&quot; == &quot;false&quot;) sEnd = &apos;&apos;; 
+}
+}
+catch(err) {alert(err);}
+}
+
+if(typeof freq==&apos;undefined&apos;) {
+freq=sforce.apex.execute(&quot;tz.LocalTime&quot;,&quot;getFrequency&quot;,{});
+}
+
+calcTime(sOffset,freq,sEnd,&quot;tz__local_time_opp_btn&quot;);</url>
+    </webLinks>
+</CustomObject>

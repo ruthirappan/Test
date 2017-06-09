@@ -1,0 +1,6 @@
+<apex:page tabStyle="Local_Time__tab">
+    <apex:sectionHeader title="Success Software" subtitle="Local Time App"/>
+    <apex:pageBlock title="Success">
+        The App's settings are updated successfully.
+    </apex:pageBlock>
+</apex:page>

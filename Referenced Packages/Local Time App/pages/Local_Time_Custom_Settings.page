@@ -1,0 +1,333 @@
+<apex:page title="Customize Local Time" controller="tz.LocalTimeCustomSettingsController" tabStyle="Local_Time__tab" sidebar="false">
+<apex:stylesheet value="/sCSS/30.0/sprites/1342034628000/Theme3/default/gc/versioning.css" />
+<apex:stylesheet value="/sCSS/30.0/sprites/1342034628000/Theme3/default/gc/extended.css" />
+
+<apex:sectionHeader title="Local Time App" subtitle="Customize Settings"/>
+    
+<style type="text/css">
+    table.tftable {
+        width:95%;
+        border: 1px solid #f3f3ec;
+        border-collapse: collapse;
+        margin-left:1%;
+    }
+    table.tftable td {
+        padding: 10px 10px 10px 10px;
+        border: 1px solid #f3f3ec;
+        border-collapse: collapse;
+        background-color:#fff;
+    }
+    
+    input.btn {
+        width: 90px;
+    }
+        
+    .rich-tab-header {
+        font-size: 14px;
+        font-weight: bold;
+    }
+    
+    .rich-tabpanel-content {
+        font-size: 12px;
+    }
+</style>
+
+<script>
+    function openWindow() {
+        var url = "/apex/tz__LocalTime_Update_Records";
+        var w = 700;
+        var h = 500;
+        var left = (screen.width/2)-(w/2);
+        var top = (screen.height/2)-(h/2);
+      
+        window.open(url, "Update Records",
+        "toolbar=no,location=no,directories=no,status=no,menubar=no,height="+h+",width="+w+",top="+top+",left="+left);
+    }
+</script>
+
+    <apex:pageMessages />
+
+    <apex:tabPanel switchType="client" selectedTab="tabSettings" id="theTabPanel">
+        <apex:tab label="SETTINGS" name="tabSettings" id="tabSettings">
+            <apex:form >
+            <apex:pageBlock id="pbGeneral" mode="edit">                    
+                <apex:pageMessages />
+                <apex:pageBlockSection title="GENERAL OPTIONS" columns="2" id="pageBlock1">
+                    <apex:inputField value="{!mc.tz__Abbreviation__c}"/>
+                    <apex:inputField value="{!mc.tz__Phone_First__c}"/>
+                    <apex:inputField value="{!mc.tz__Enable_Batch_Updates__c}"/>
+
+                    <apex:pageBlockSectionItem helpText="{!$ObjectType.tz__lt_app_settings__c.Fields.tz__Gadget_Time_Format__c.inlineHelpText}">
+                        <apex:outputLabel value="{!$ObjectType.tz__lt_app_settings__c.Fields.tz__Gadget_Time_Format__c.Label}" />
+                        <apex:selectList value="{!mc.tz__Gadget_Time_Format__c}" size="1">
+                            <apex:selectOptions value="{!timeFormats}"/>
+                        </apex:selectList>
+                    </apex:pageBlockSectionItem>
+
+                    <apex:pageBlockSectionItem helpText="Manually update records with missing timezone information">
+                        <apex:outputLabel value="Mass Update Records"/>
+                        <apex:commandLink onclick="openWindow();" value="Click here" />
+                    </apex:pageBlockSectionItem>
+                
+                    <apex:pageBlockSectionItem helpText="{!$ObjectType.tz__lt_app_settings__c.Fields.tz__Default_Phone_Code__c.inlineHelpText}">
+                        <apex:outputLabel value="{!$ObjectType.tz__lt_app_settings__c.Fields.tz__Default_Phone_Code__c.Label}" />
+                        <apex:selectList value="{!mc.tz__Default_Phone_Code__c}" size="1">
+                            <apex:selectOptions value="{!countryCodes}"/>
+                        </apex:selectList>
+                    </apex:pageBlockSectionItem>
+
+                    <apex:pageBlockSectionItem helpText="Access or delete the error logs. The Delete action launches a batch job to delete the error log records." >
+                        <apex:outputLabel value="Error Logs"/>
+                        <apex:panelGrid columns="2" width="50%">
+                            <apex:outputLink value="{!URLFOR($Action.Local_Time_Error_Log__c.Tab, $ObjectType.Local_Time_Error_Log__c)}"
+                             target="_blank">View</apex:outputLink>                         
+                             <apex:commandLink action="{!deleteLogs}">Delete</apex:commandLink>
+                         </apex:panelGrid>
+                    </apex:pageBlockSectionItem>
+                    
+                </apex:pageBlockSection>
+    
+                <!-- Address and Phone Fields -->
+                <apex:pageBlockSection title="ADDRESS & PHONE FIELDS" columns="1">
+                    <apex:outputText value="The Local Time App uses address and phone fields to compute the local time. Specify the appropriate fields (text or phone data type only) to be used for the following objects." />
+                    <apex:outputText value="It is your responsibility to select a field which has proper values. The following fields are currently being used. No changes necessary if you are OK with the default address and phone fields." />
+                    <br/>
+                </apex:pageBlockSection>
+    
+                <table id="custom_fields" class="tftable">
+                    <tr>
+                        <th class="pbSubheader brandTertiaryBgr tertiaryPalette" width="15%">OBJECT</th>
+                        <th class="pbSubheader brandTertiaryBgr tertiaryPalette" width="15%">COUNTRY</th>
+                        <th class="pbSubheader brandTertiaryBgr tertiaryPalette" width="15%">STATE</th>            
+                        <th class="pbSubheader brandTertiaryBgr tertiaryPalette" width="15%">CITY</th>            
+                        <th class="pbSubheader brandTertiaryBgr tertiaryPalette" width="15%">POSTAL CODE</th>            
+                        <th class="pbSubheader brandTertiaryBgr tertiaryPalette" width="15%">PHONE</th>
+                    </tr>            
+                    <tr>
+                        <td>ACCOUNT</td>
+                        <td><apex:selectList value="{!acctValues[0]}" size="1"><apex:selectOptions value="{!acctFields}"/></apex:selectList></td>
+                        <td><apex:selectList value="{!acctValues[1]}" size="1"><apex:selectOptions value="{!acctFields}"/></apex:selectList></td>
+                        <td><apex:selectList value="{!acctValues[2]}" size="1"><apex:selectOptions value="{!acctFields}"/></apex:selectList></td>
+                        <td><apex:selectList value="{!acctValues[4]}" size="1"><apex:selectOptions value="{!acctFields}"/></apex:selectList></td>
+                        <td><apex:selectList value="{!acctValues[3]}" size="1"><apex:selectOptions value="{!acctFields}"/></apex:selectList></td>
+                    </tr>
+                    <apex:outputPanel rendered="{!bPersonAccounts}">
+                        <tr>
+                            <td>PERSON ACCOUNT</td>
+                            <td><apex:selectList value="{!pacctValues[0]}" size="1"><apex:selectOptions value="{!pacctFields}"/></apex:selectList></td>
+                            <td><apex:selectList value="{!pacctValues[1]}" size="1"><apex:selectOptions value="{!pacctFields}"/></apex:selectList></td>
+                            <td><apex:selectList value="{!pacctValues[2]}" size="1"><apex:selectOptions value="{!pacctFields}"/></apex:selectList></td>
+                            <td><apex:selectList value="{!pacctValues[4]}" size="1"><apex:selectOptions value="{!pacctFields}"/></apex:selectList></td>
+                            <td><apex:selectList value="{!pacctValues[3]}" size="1"><apex:selectOptions value="{!pacctFields}"/></apex:selectList></td>
+                        </tr>
+                    </apex:outputPanel>
+                    <tr>
+                        <td>LEAD</td>
+                        <td><apex:selectList value="{!leadValues[0]}" size="1"><apex:selectOptions value="{!leadFields}"/></apex:selectList></td>
+                        <td><apex:selectList value="{!leadValues[1]}" size="1"><apex:selectOptions value="{!leadFields}"/></apex:selectList></td>
+                        <td><apex:selectList value="{!leadValues[2]}" size="1"><apex:selectOptions value="{!leadFields}"/></apex:selectList></td>      
+                        <td><apex:selectList value="{!leadValues[4]}" size="1"><apex:selectOptions value="{!leadFields}"/></apex:selectList></td>
+                        <td><apex:selectList value="{!leadValues[3]}" size="1"><apex:selectOptions value="{!leadFields}"/></apex:selectList></td>
+                    </tr>
+                    <tr>
+                        <td>CONTACT</td>
+                        <td><apex:selectList value="{!ctValues[0]}" size="1"><apex:selectOptions value="{!ctFields}"/></apex:selectList></td>
+                        <td><apex:selectList value="{!ctValues[1]}" size="1"><apex:selectOptions value="{!ctFields}"/></apex:selectList></td>
+                        <td><apex:selectList value="{!ctValues[2]}" size="1"><apex:selectOptions value="{!ctFields}"/></apex:selectList></td>
+                        <td><apex:selectList value="{!ctValues[4]}" size="1"><apex:selectOptions value="{!ctFields}"/></apex:selectList></td>
+                        <td><apex:selectList value="{!ctValues[3]}" size="1"><apex:selectOptions value="{!ctFields}"/></apex:selectList></td>
+                    </tr>
+                </table>
+                   
+                <!-- Triggers -->
+                <apex:pageBlockSection title="TRIGGERS" columns="1">
+                    <apex:outputText value="The Local Time App uses triggers to compute the local time when records are updated. Select for which objects you want the triggers to be enabled/disabled." />
+                    <br/> 
+                </apex:pageBlockSection>
+    
+                <table id="enable_triggers" class="tftable">
+                    <tr>
+                        <th class="pbSubheader brandTertiaryBgr tertiaryPalette" width="25%">OBJECT</th>
+                        <th class="pbSubheader brandTertiaryBgr tertiaryPalette" width="25%">ENABLE/DISABLE</th>            
+                    </tr>            
+                    <tr>
+                        <td>ACCOUNT</td>
+                        <td><apex:inputCheckbox value="{!accountTgr[0]}" /></td>
+                    </tr>
+                    <tr>
+                        <td>LEAD</td>
+                        <td><apex:inputCheckbox value="{!leadTgr[0]}" /></td>
+                    </tr>
+                    <tr>
+                        <td>CONTACT</td>
+                        <td><apex:inputCheckbox value="{!contactTgr[0]}" /></td>
+                    </tr>
+                    <tr>
+                        <td>ACTIVITY</td>
+                        <td><apex:inputCheckbox value="{!activityTgr[0]}" /></td>
+                    </tr>
+                    <tr>
+                        <td>CASE</td>
+                        <td><apex:inputCheckbox value="{!caseTgr[0]}" /></td>
+                    </tr>
+                    <tr>
+                        <td>CUSTOM OBJECT</td>
+                        <td>Contact us at info@success-software.biz for sample trigger code</td>
+                    </tr>
+                </table>
+<!--    
+                <apex:pageBlockSection columns="1">
+                    <apex:outputPanel id="lt_status">          
+                    <apex:actionStatus id="lt_msg">
+                        <apex:facet name="start">The settings are being saved. Please wait...
+                            <img src="/apexpages/devmode/img/saveStatus.gif"/>
+                        </apex:facet>         
+                    </apex:actionStatus>
+                    </apex:outputPanel>
+                </apex:pageBlockSection>
+-->
+                <div style="text-align:center; margin:10px 0px 10px 0px;">
+                        <apex:commandButton action="{!save}" value="Save" reRender="pbGeneral"/>
+                        <apex:commandButton style="margin-left:25px;" action="{!cancel}" value="Cancel"/>
+                </div>
+
+            </apex:pageBlock>
+            </apex:form>  
+        </apex:tab>
+    
+        <apex:tab label="BATCH UPDATES" name="tabBATCH" id="tabBATCH">
+            <apex:form >
+            <apex:pageBlock id="pbBatch" mode="edit">                    
+                <apex:pageMessages />
+                <apex:pageBlockSection columns="1">
+                    <apex:outputText style="font-size: 12px;">
+                    The batch job updates the records on the days when <strong>DST Start</strong>s and <strong>DST End</strong>s by using the following queries. If 
+                    needed, you can modify the filter conditions to further restrict the number of records. Please *do not* 
+                    include any address related fields as the App already takes them into consideration. Use 
+                    only Salesforce supported SOQL syntax to specify the filter conditions.
+                    <br/><br/> 
+                    </apex:outputText>
+                </apex:pageBlockSection>
+
+                <table id="batch_updates" class="tftable">
+                    <tr>
+                        <th class="pbSubheader brandTertiaryBgr tertiaryPalette" width="10%">OBJECT</th>
+                        <th class="pbSubheader brandTertiaryBgr tertiaryPalette" width="30%">QUERY</th>            
+                        <th class="pbSubheader brandTertiaryBgr tertiaryPalette" width="10%">CONDITION</th>            
+                        <th class="pbSubheader brandTertiaryBgr tertiaryPalette" width="50%">FILTER</th>
+                    </tr>            
+
+                    <apex:repeat value="{!mapObj}" var="objKey">
+                            <tr>
+                                <td>{!objKey}</td>
+                                <td><apex:inputTextarea disabled="true" rows="1" cols="60" value="{!mapObj[objKey].sQuery}"/></td>
+                                <td>WHERE</td>
+                                <td><apex:inputTextarea rows="3" cols="80" value="{!mapObj[objKey].sFilter}"/></td>
+                            </tr>
+                    </apex:repeat>
+                </table>
+
+                <div style="text-align:center; margin:10px 0px 10px 0px;">
+                        <apex:commandButton action="{!save}" value="Save" reRender="pbBatch"/>
+                        <apex:commandButton style="margin-left:25px;" action="{!cancel}" value="Cancel"/>
+                </div>
+
+            </apex:pageBlock>
+            </apex:form>
+        </apex:tab>
+
+        <apex:tab label="DST SCHEDULE" name="tabDST" id="tabDST">
+            <apex:pageBlock mode="edit">
+                <apex:pageBlockSection columns="1">
+                <apex:outputText style="font-size: 12px;">
+                The following DST schedule indicates when the Local Time App&#39;s batch job will update the Lead, Contact, and Account records for a given region.
+                The records will only be updated if the <strong>Enable DST Batch Updates</strong> option in <strong>SETTINGS</strong> tab is enabled.
+                If this option is disabled, the batch job will not run, and the records in the affected region will continue to show
+                 local times unadjusted for DST, and it is your responsibility to manually update these records.
+                <br/><br/>
+                The batch job updates the records on the days when <strong>DST Start</strong>s and <strong>DST End</strong>s. In
+                 case you have any workflows that send out emails to customers or perform any business critical actions due to updates on Lead, Contact, and Account records,
+                 it is recommended that you temporarily disable them during the days when the batch job runs.  
+                <br/><br/> 
+                Another option is to modify the workflows to ignore any changes made to the Local Time App fields so that they do not fire workflow actions when the batch job updates the records.
+                 Following are the Local Time App related custom fields that are modified by the batch job:
+                <ul>
+                <li>tz__Timezone__c</li>
+                <li>tz__UTF_Offset__c</li>
+                <li>tz__Timezone_Full__c</li>
+                <li>tz__Timezone_IANA__c</li>
+                </ul>
+                </apex:outputText>
+                </apex:pageBlockSection>
+            
+            <table id="dst_schedule" class="tftable">
+                <tr>
+                    <th class="pbSubheader brandTertiaryBgr tertiaryPalette" width="20%">REGION</th>
+                    <th class="pbSubheader brandTertiaryBgr tertiaryPalette" width="40%">DST START</th>
+                    <th class="pbSubheader brandTertiaryBgr tertiaryPalette" width="40%">DST END</th>
+                </tr>
+    
+                <tr>
+                    <td>NORTH AMERICA</td>
+                    <td><apex:outputText value="Sunday, 12 March 2017, 02:00:00 clocks are turned forward 1 hour" /></td>
+                    <td><apex:outputText value="Sunday, 5 November 2017, 02:00:00 clocks are turned backward 1 hour" /></td>
+                </tr>
+                <tr>
+                    <td>SOUTH AMERICA</td>
+                    <td><apex:outputText value="Sunday, 16 October 2016, 00:00:00 clocks turned forward 1 hour" /></td>
+                    <td><apex:outputText value="Sunday, 19 February 2017, 00:00:00 clocks are turned backward 1 hour" /></td>
+                </tr>
+                <tr>
+                    <td>EUROPE</td>
+                    <td><apex:outputText value="Sunday, 26 March 2017, 02:00:00 clocks are turned forward 1 hour" /></td>
+                    <td><apex:outputText value="Sunday, 29 October 2017, 03:00:00 clocks are turned backward 1 hour" /></td>
+                </tr>
+                <tr>
+                    <td>ASIA</td>
+                    <td><apex:outputText value="Wednesday, 22 March 2017, 00:00:00 clocks are turned forward 1 hour" /></td>
+                    <td><apex:outputText value="Friday, 22 September 2017, 00:00:00 clocks are turned backward 1 hour" /></td>
+                </tr>
+                <tr>
+                    <td>OCEANIA</td>
+                    <td><apex:outputText value="Sunday, 2 October 2016, 02:00:00 clocks turned forward 1 hour" /></td>
+                    <td><apex:outputText value="Sunday, 2 April 2017, 03:00:00 clocks turned backward 1 hour" /></td>
+                </tr>
+                <tr>
+                    <td>NEW ZEALAND</td>
+                    <td><apex:outputText value="Sunday, 25 September 2016, 02:00:00 clocks turned forward 1 hour" /></td>
+                    <td><apex:outputText value="Sunday, 2 April 2017, 03:00:00 clocks turned backward 1 hour" /></td>
+                </tr>
+                <tr>
+                    <td>ISRAEL</td>
+                    <td><apex:outputText value="Friday, 24 March 2017, 02:00:00 clocks are turned forward 1 hour" /></td>
+                    <td><apex:outputText value="Sunday, 29 October 2017, 02:00:00 clocks are turned backward 1 hour" /></td>
+                </tr>
+            </table>
+            </apex:pageBlock>
+        </apex:tab>
+
+        <apex:tab label="SUPPORT" name="tabSupport" id="tabSupport">
+            <apex:pageBlock mode="edit">
+                <apex:pageBlockSection columns="2">
+                    <apex:pageblockSectionItem >
+                        <apex:outputLabel style="font-weight:bold;color:#4a4a56;" value="Configuration Guide" />
+                        <apex:outputLink value="http://www.success-software.biz/products/local-time/installation-guide/" target="_blank">Configuration Guide</apex:outputLink>
+                    </apex:pageblockSectionItem>
+                    <apex:pageblockSectionItem >
+                        <apex:outputLabel style="font-weight:bold;color:#4a4a56;" value="FAQ" />
+                        <apex:outputLink value="http://www.success-software.biz/products/local-time/frequently-asked-questions/" target="_blank">FAQ</apex:outputLink>
+                    </apex:pageblockSectionItem>
+                    <apex:pageblockSectionItem >
+                        <apex:outputLabel style="font-weight:bold;color:#4a4a56;" value="Email" />
+                        <apex:outputLink value="mailto:info@success-software.biz">info@success-software.biz</apex:outputLink>
+                    </apex:pageblockSectionItem>
+                    <apex:pageblockSectionItem >
+                        <apex:outputLabel style="font-weight:bold;color:#4a4a56;" value="Phone" />
+                        <apex:outputText value="+45 6020 5378" />
+                    </apex:pageblockSectionItem>
+                </apex:pageBlockSection>
+            </apex:pageBlock>
+        </apex:tab>
+
+    </apex:tabPanel>
+</apex:page>

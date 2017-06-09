@@ -1,0 +1,14 @@
+<apex:page controller="NavigatingPageController" tabStyle="Account" >
+   <apex:sectionHeader title="New Account Edit Page"/>
+   <apex:form >
+       <apex:pageBlock title="Create a New Account">
+          <apex:pageBlockButtons location="bottom">
+              <apex:commandButton action="{!Save}" value="save"/>
+          </apex:pageBlockButtons>
+          <apex:pageBlockSection title="Account Information">
+               <apex:inputField id="accountName" value="{!Account.Name}"/>
+               <apex:inputField id="accountSite" value="{!Account.Site}"/>
+          </apex:pageBlockSection>
+       </apex:pageBlock>
+  </apex:form>
+</apex:page>

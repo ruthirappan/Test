@@ -1,0 +1,4 @@
+<apex:page standardstylesheets="false" showheader="false" >
+ <apex:stylesheet value="{!$Resource.CSSExample}"/>
+ <h1> This text is displayed using CSS </h1>
+</apex:page>

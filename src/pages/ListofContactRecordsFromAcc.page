@@ -1,0 +1,71 @@
+<apex:page controller="AccountContact"  tabStyle="Account" sidebar="false" showheader="false" >
+    
+   <Script>
+    
+    function switchMenu(obj,obj1,obj2) 
+        {
+            var el = document.getElementById(obj);                                       
+            if ( el.style.display != 'none' ) {
+            el.style.display = 'none';
+            }
+            else {
+            el.style.display = '';
+            }
+            var e2 = document.getElementById(obj1);                                       
+            if ( e2.style.display != 'none' ) {
+            e2.style.display = 'none';
+            }
+            else {
+            e2.style.display = '';
+            }
+             var e3 = document.getElementById(obj2);                                       
+            if ( e2.style.display != 'none' ) {
+            e3.style.display = 'none';
+            }
+            else {
+            e3.style.display = '';
+            }
+
+        }    
+   
+    </Script>
+   
+   <apex:pageBlock title="Hello {!$User.LastName}! List of Accounts and its Related contacts"></apex:pageBlock>
+    <apex:pageBlock title="Accounts and its Contacts">
+     <apex:pageblocktable value="{!accounts}"  var="accDetail">
+            <apex:column >
+                   <apex:facet name="header">                                        
+                        Contacts                                                                               
+                    </apex:facet>
+                    <apex:outputpanel id="plusimage">
+                          <apex:image url="{!$Resource.Expand}" onclick="switchMenu('{!$Component.inlinetablesec}','{!$Component.minusimage}','{!$Component.plusimage}')" title="Expand - Contacts"/> 
+                    </apex:outputpanel>
+                    <apex:outputpanel id="minusimage" style="display:none;">
+                          <apex:image url="{!$Resource.Collapse}" onclick="switchMenu('{!$Component.inlinetablesec}','{!$Component.plusimage}','{!$Component.minusimage}')" title="Collapse - Contacts"/>
+                    </apex:outputpanel>
+                    <apex:outputpanel id="inlinetablesec" style="display:none;" >
+                                                <apex:variable value="{!0}" var="rowNum"/>
+                                                <apex:repeat var="count" value="{!accDetail.Contacts}">
+                                                    <apex:variable var="rowNum" value="{!rowNum+1}"/>
+                                                </apex:repeat>
+                            <apex:outputText rendered="{!rowNum=0}">  No Contacts  </apex:outputText>
+                        <apex:pageblocktable value="{!accDetail.Contacts}" var="con" rendered="{!rowNum>0}">
+                            <apex:column headerValue="Contact">
+                                   <apex:outputfield value="{!con.LastName}"/>
+                             </apex:column>
+                             <apex:column headerValue="Email">
+                                   <apex:outputfield value="{!con.Email}"/>
+                             </apex:column>                          
+                        </apex:pageblocktable>
+                   </apex:outputpanel>     
+            </apex:column>
+            <apex:column headervalue="Account Name">
+                    <apex:outputtext value="{!accDetail.Name}"/>
+            </apex:column>
+            <apex:column headervalue="Type">
+                    <apex:outputtext value="{!accDetail.Type}"/>
+            </apex:column>
+        
+     </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:page>

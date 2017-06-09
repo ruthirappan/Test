@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Local_Time__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Shows the local time for the related Lead or Contact.</description>
+        <externalId>false</externalId>
+        <formula>IF(ISBLANK(UTC_Offset__c),
+&quot;Unknown&quot;,
+LEFT(Text(NOW()+ UTC_Offset__c /24),LEN(Text(NOW()+ UTC_Offset__c /24))-1)&amp; &quot; &quot; &amp; Timezone__c
+)</formula>
+        <inlineHelpText>Shows the local time for the related Lead or Contact.</inlineHelpText>
+        <label>Local Time</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Timezone__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Timezone abbreviation (PST, EST,etc..)</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Timezone abbreviation (PST, EST,etc..)</inlineHelpText>
+        <label>Timezone</label>
+        <length>10</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UTC_Offset__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Shows the UTC timezone offset of the Lead / Contact associated with the task.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Shows the UTC timezone offset of the Lead / Contact associated with the task.</inlineHelpText>
+        <label>UTC Offset</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+</CustomObject>

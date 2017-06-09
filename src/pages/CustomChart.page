@@ -1,0 +1,11 @@
+<apex:page controller="ChartController" ShowHeader="False" Sidebar="False">
+    <apex:chart height="400" width="700" data="{!data}">
+          <apex:axis type="Numeric" position="left" fields="data1"
+            title="Cases Closed" grid="true"/>
+          <apex:axis type="Category" position="bottom" fields="name"
+            title="Cases Created">
+        </apex:axis>
+        <apex:lineSeries axis="left" fill="true" xField="name" yField="data1"
+          markerType="cross" markerSize="4" markerFill="#FF0000"/>
+   </apex:chart>
+</apex:page>
